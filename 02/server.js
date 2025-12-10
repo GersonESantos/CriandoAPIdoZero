@@ -1,34 +1,20 @@
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client'; // Usando a importação direta
 import 'dotenv/config';
 
 const app = express();
-const prisma = new PrismaClient();
+
+// A MUDANÇA ESTÁ AQUI:
+// Passamos a URL do banco de dados diretamente para o construtor
+const prisma = new PrismaClient({
+  datasourceUrl: process.env.DATABASE_URL,
+});
 
 app.use(express.json());
 
 const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.post('/users', async (req, res) => {
-  try {
-    const { name, email, senha, tel } = req.body;
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        senha,
-        tel,
-      },
-    });
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+// ... resto do seu código do servidor ...
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);

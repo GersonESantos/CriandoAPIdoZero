@@ -1,9 +1,6 @@
 // Importa e configura o dotenv para carregar variáveis de ambiente
 require("dotenv/config");
 
-// Importa as funções necessárias do pacote de configuração do Prisma// Importa e configura o dotenv para carregar variáveis de ambiente
-require("dotenv/config");
-
 // Importa as funções necessárias do pacote de configuração do Prisma
 const { defineConfig, env } = require("prisma/config");
 
